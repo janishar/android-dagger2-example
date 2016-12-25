@@ -3,11 +3,13 @@ package com.mindorks.example.android_dagger2_example.data;
 import android.content.SharedPreferences;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Created by janisharali on 25/12/16.
  */
 
+@Singleton
 public class SharedPrefsHelper {
 
     public static String PREF_KEY_ACCESS_TOKEN = "access-token";

@@ -13,11 +13,13 @@ import com.mindorks.example.android_dagger2_example.di.ApplicationContext;
 import com.mindorks.example.android_dagger2_example.di.DatabaseInfo;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Created by janisharali on 25/12/16.
  */
 
+@Singleton
 public class DbHelper extends SQLiteOpenHelper {
 
     //USER TABLE
