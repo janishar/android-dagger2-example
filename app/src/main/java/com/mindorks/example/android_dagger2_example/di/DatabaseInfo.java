@@ -10,6 +10,6 @@ import javax.inject.Qualifier;
  */
 
 @Qualifier
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface DatabaseInfo {
 }
