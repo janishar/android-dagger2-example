@@ -1,10 +1,14 @@
 package com.mindorks.example.android_dagger2_example.di.module;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 
+import com.mindorks.example.android_dagger2_example.MainActivity;
 import com.mindorks.example.android_dagger2_example.di.ActivityContext;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 
@@ -13,22 +17,10 @@ import dagger.Provides;
  */
 
 @Module
-public class ActivityModule {
+public abstract class ActivityModule {
 
-    private Activity mActivity;
-
-    public ActivityModule(Activity activity) {
-        mActivity = activity;
-    }
-
-    @Provides
+    @Binds
     @ActivityContext
-    Context provideContext() {
-        return mActivity;
-    }
+    abstract Activity provideActivity(MainActivity activity);
 
-    @Provides
-    Activity provideActivity() {
-        return mActivity;
-    }
 }

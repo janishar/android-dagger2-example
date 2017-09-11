@@ -3,10 +3,11 @@ package com.mindorks.example.android_dagger2_example.di.module;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.mindorks.example.android_dagger2_example.di.ApplicationContext;
 import com.mindorks.example.android_dagger2_example.di.DatabaseInfo;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,22 +19,18 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
-    private final Application mApplication;
-
-    public ApplicationModule(Application app) {
-        mApplication = app;
-    }
-
-    @Provides
     @ApplicationContext
-    Context provideContext() {
-        return mApplication;
+    @Singleton
+    @Provides
+    Context provideContext(Application application) {
+        return application.getApplicationContext();
     }
 
     @Provides
-    Application provideApplication() {
-        return mApplication;
+    static SharedPreferences provideSharedPrefs(Application application) {
+        return application.getSharedPreferences("demo-prefs", Context.MODE_PRIVATE);
     }
+
 
     @Provides
     @DatabaseInfo
@@ -47,8 +44,5 @@ public class ApplicationModule {
         return 2;
     }
 
-    @Provides
-    SharedPreferences provideSharedPrefs() {
-        return mApplication.getSharedPreferences("demo-prefs", Context.MODE_PRIVATE);
-    }
+
 }
