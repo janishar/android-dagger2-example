@@ -1,18 +1,17 @@
 package com.mindorks.example.android_dagger2_example.di.component;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.mindorks.example.android_dagger2_example.DemoApplication;
-import com.mindorks.example.android_dagger2_example.data.DataManager;
-import com.mindorks.example.android_dagger2_example.data.DbHelper;
-import com.mindorks.example.android_dagger2_example.data.SharedPrefsHelper;
-import com.mindorks.example.android_dagger2_example.di.ApplicationContext;
+import com.mindorks.example.android_dagger2_example.di.module.ActivityModule;
 import com.mindorks.example.android_dagger2_example.di.module.ApplicationModule;
 
 import javax.inject.Singleton;
 
+import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjector;
+import dagger.android.support.AndroidSupportInjectionModule;
 
 
 /**
@@ -20,20 +19,17 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
+@Component(modules = {ActivityBindingModule.class, ApplicationModule.class, AndroidSupportInjectionModule.class})
+public interface ApplicationComponent extends AndroidInjector<DemoApplication> {
 
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        ApplicationComponent.Builder application(Application application);
+        ApplicationComponent build();
+    }
+
+    @Override
     void inject(DemoApplication demoApplication);
-
-    @ApplicationContext
-    Context getContext();
-
-    Application getApplication();
-
-    DataManager getDataManager();
-
-    SharedPrefsHelper getPreferenceHelper();
-
-    DbHelper getDbHelper();
 
 }
