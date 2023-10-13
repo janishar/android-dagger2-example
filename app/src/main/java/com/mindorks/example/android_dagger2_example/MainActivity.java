@@ -1,6 +1,5 @@
 package com.mindorks.example.android_dagger2_example;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +9,6 @@ import com.mindorks.example.android_dagger2_example.data.DataManager;
 import com.mindorks.example.android_dagger2_example.data.model.User;
 import com.mindorks.example.android_dagger2_example.di.component.ActivityComponent;
 import com.mindorks.example.android_dagger2_example.di.component.DaggerActivityComponent;
-import com.mindorks.example.android_dagger2_example.di.module.ActivityModule;
 
 import javax.inject.Inject;
 
@@ -27,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     public ActivityComponent getActivityComponent() {
         if (activityComponent == null) {
             activityComponent = DaggerActivityComponent.builder()
-                    .activityModule(new ActivityModule(this))
                     .applicationComponent(DemoApplication.get(this).getComponent())
                     .build();
         }
